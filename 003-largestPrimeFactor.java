@@ -2,7 +2,7 @@
 public class largestPrimeFactor2 {
 	
 	public static boolean IsPrime(long m) {
-		if(m < 2) return false;
+	    if(m < 2) return false;
 	    if(m == 2 || m == 3) return true;
 	    if(m%2 == 0 || m%3 == 0) return false;
 	    long i = 6;
