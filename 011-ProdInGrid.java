@@ -2,83 +2,63 @@
 //adjacent numbers in the same direction (up, down, left, right,
 //or diagonally) in the 20×20 grid?
 
-public class N011ProdInGrid2 {
+public class N011ProdInGrid3 {
 
 	public static int[][] StringInto2DArray(String Text) {
 		String[] TextArray = Text.split(" ");
-		int[] IntArray = new int[TextArray.length];
-		for (int i = 0; i < IntArray.length; i++) {
-			IntArray[i] = Integer.parseInt(TextArray[i]);
-		}
 		int[][] IntGrid = new int[20][20];
-		int j = 0;
+		int i = 0;
 		for (int row = 0; row < 20; row ++) {
 			for (int column = 0; column < 20; column ++) {
-				IntGrid[row][column] = IntArray[j];
-				j++;			
+				IntGrid[row][column] = Integer.parseInt(TextArray[i]);
+				i++;			
 			}
 		}
 		return IntGrid;
 	}
 	
 	public static int SearchProduct (int[][] Grid) {
-		int TestProduct1 = 1;
-		int HorizontalProduct = 0;
-		for (int row = 0; row < 20; row ++) {
-			for (int column = 0; column < 17; column ++) {
-				for (int i=0; i<4; i++) {
-					TestProduct1 *= Grid[row][column+i];
+		int horizontal = 0;
+		int vertical = 0;
+		int downDiag = 0;
+		int upDiag = 0;
+		int max = 0;
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 20; j++) {
+				if (j+3<20) {
+					horizontal = Grid[i][j]*Grid[i][j+1]*Grid[i][j+2]*Grid[i][j+3];
 				}
-			if (TestProduct1 > HorizontalProduct) {
-				HorizontalProduct = TestProduct1;
-			}	
-			TestProduct1 = 1;
+				if (horizontal > max) {
+					max = horizontal;
+				}	
+				horizontal = 0;
+				
+				if (i+3<20) {
+					vertical = Grid[i][j]*Grid[i+1][j]*Grid[i+2][j]*Grid[i+3][j];
+				}
+				if (vertical > max) {
+					max = vertical;
+				}	
+				vertical = 0;
+				
+				if (i+3<20 && j+3<20) {
+					downDiag = Grid[i][j]*Grid[i+1][j+1]*Grid[i+2][j+2]*Grid[i+3][j+3];
+				}
+				if (downDiag > max) {
+					max = downDiag;
+				}	
+				downDiag = 0;
+				
+				if (i-3>=0 && j+3<20) {
+					upDiag = Grid[i][j]*Grid[i-1][j+1]*Grid[i-2][j+2]*Grid[i-3][j+3];
+				}
+				if (upDiag > max) {
+					max = upDiag;
+				}	
+				upDiag = 0;
 			}
 		}
-		
-		int TestProduct2 = 1;
-		int VerticalProduct = 0;
-		for (int row = 0; row < 17; row ++) {
-			for (int column = 0; column < 20; column ++) {
-				for (int i=0; i<4; i++) {
-					TestProduct2 *= Grid[row+i][column];					
-				}
-			if (TestProduct2 > VerticalProduct) {
-				VerticalProduct = TestProduct2;
-			}
-			TestProduct2 = 1;	
-			}
-		}
-		
-		int TestProduct3 = 1;
-		int DescDiagProduct = 0;
-		for (int row = 0; row < 17; row ++) {
-			for (int column = 0; column < 17; column ++) {
-				for (int i=0; i<4; i++) {					
-					TestProduct3 *= Grid[row+i][column+i];
-				}
-			if (TestProduct3 > DescDiagProduct) {
-				DescDiagProduct = TestProduct3;
-			}
-			TestProduct3 = 1;
-			}
-		}
-		
-		int TestProduct4 = 1;		
-		int AscDiagProduct = 0;
-		for (int row = 3; row < 20 ; row ++) {
-			for (int column = 0; column < 17; column ++) {
-				for (int i=0; i<4; i++) {
-					TestProduct4 *= Grid[row-i][column+i];					
-				}
-			if (TestProduct4 > AscDiagProduct) {
-				AscDiagProduct = TestProduct4;
-			}
-			TestProduct4 = 1;
-			}
-		}
-		
-		return Math.max(Math.max(HorizontalProduct, VerticalProduct), Math.max(DescDiagProduct, AscDiagProduct));
+		return max;
 	}
 	
 	public static void main(String[] args) {
