@@ -1,8 +1,7 @@
 public class N009SpecialTriplet {
 
 	public static boolean IsTriplet(int a, int b, int c) {
-		if (a*a + b*b == c*c) return true;
-		else return false;
+		return a*a + b*b == c*c;
 	}
 	
 	public static void main(String[] args) {
