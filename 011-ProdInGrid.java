@@ -16,46 +16,26 @@ public class N011ProdInGrid3 {
 		}
 		return IntGrid;
 	}
-	
+
 	public static int SearchProduct (int[][] Grid) {
-		int horizontal = 0;
-		int vertical = 0;
-		int downDiag = 0;
-		int upDiag = 0;
 		int max = 0;
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 20; j++) {
 				if (j+3<20) {
-					horizontal = Grid[i][j]*Grid[i][j+1]*Grid[i][j+2]*Grid[i][j+3];
+					max = Math.max(max, Grid[i][j]*Grid[i][j+1]*Grid[i][j+2]*Grid[i][j+3]);
 				}
-				if (horizontal > max) {
-					max = horizontal;
-				}	
-				horizontal = 0;
-				
+								
 				if (i+3<20) {
-					vertical = Grid[i][j]*Grid[i+1][j]*Grid[i+2][j]*Grid[i+3][j];
+					max = Math.max(max, Grid[i][j]*Grid[i+1][j]*Grid[i+2][j]*Grid[i+3][j]);
 				}
-				if (vertical > max) {
-					max = vertical;
-				}	
-				vertical = 0;
-				
+								
 				if (i+3<20 && j+3<20) {
-					downDiag = Grid[i][j]*Grid[i+1][j+1]*Grid[i+2][j+2]*Grid[i+3][j+3];
+					max = Math.max(max, Grid[i][j]*Grid[i+1][j+1]*Grid[i+2][j+2]*Grid[i+3][j+3]);
 				}
-				if (downDiag > max) {
-					max = downDiag;
-				}	
-				downDiag = 0;
-				
+								
 				if (i-3>=0 && j+3<20) {
-					upDiag = Grid[i][j]*Grid[i-1][j+1]*Grid[i-2][j+2]*Grid[i-3][j+3];
+					max = Math.max(max, Grid[i][j]*Grid[i-1][j+1]*Grid[i-2][j+2]*Grid[i-3][j+3]);
 				}
-				if (upDiag > max) {
-					max = upDiag;
-				}	
-				upDiag = 0;
 			}
 		}
 		return max;
