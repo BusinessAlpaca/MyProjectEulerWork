@@ -2,13 +2,6 @@
 
 public class bigsum {
 	
-	public static String[] extendArray(String [] array) {
-	    String[] temp = array.clone();
-	    array = new String[array.length + 1];
-	    System.arraycopy(temp, 0, array, 0, temp.length);
-	    return array;
-	}
-
 	public static String sum(String[] list) {
 		
 		String sum = "";
@@ -44,7 +37,10 @@ public class bigsum {
 			}
 			
 			
-			extendArray(list);
+			String[] temp = list.clone();
+		    list = new String[list.length + 1];
+		    System.arraycopy(temp, 0, list, 0, temp.length);
+		    
 			list[list.length - 1] = carry;
 			c++;
 		}
