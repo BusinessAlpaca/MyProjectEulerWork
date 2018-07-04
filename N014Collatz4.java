@@ -1,4 +1,4 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /* The following iterative sequence is defined for the set of positive integers:
  * n -> n/2 (n is even) n -> 3n + 1 (n is odd) Using the rule above and starting
@@ -9,33 +9,59 @@ import java.util.HashMap;
  * produces the longest chain?
  */
 
-public class N014Collatz4 {
+public class N014Collatz7 {
 
-	public static HashMap<Integer, Integer> stepDown(HashMap<Integer, Integer> current) {
-		HashMap<Integer, Integer> next = new HashMap<Integer, Integer>();
-		for (int i : current.keySet()) {
-			if (current.get(i) % 2 == 0) {
-				if (current.get(i) / 2 != 1) next.put(i, current.get(i) / 2);
+	/*The stepDown method updates an arraylist of pairs of the form (number n, some number in n's Collatz sequence).
+	 * The updating is done thus: If the original pair has the form (number n, 1), then that pair is removed from
+	 * the arraylist. Otherwise, the original pair is replaced with the pair (same number n, the next number in n's Collatz sequence).
+	 * The system ensures that the number of pairs cannot increase. Also, since all numbers (presumably) have 1 in their Collatz sequence,
+	 * the system ensures that the number of pairs will quickly decrease.
+	 */
+	
+	public static ArrayList<Integer[]> stepDown(ArrayList<Integer[]> current) {		
+		for (int i = 0; i < current.size(); i++) {
+			if (current.get(i)[1] == 1) {
+				current.remove(i);
+				i--;
+				continue;
+			}
+			else if (current.get(i)[1] % 2 == 0) {
+				Integer[] obj = new Integer[2];
+				obj[0] = current.get(i)[0];
+				obj[1] = current.get(i)[1] / 2;
+				current.set(i, obj);
 			} else {
-				next.put(i, current.get(i) *3 +1);				
+				Integer[] obj = new Integer[2];
+				obj[0] = current.get(i)[0];
+				obj[1] = current.get(i)[1] * 3 + 1;
+				current.set(i, obj);
 			}
 		}
-		return next;
+		System.out.println(current.size()); //Test. prints out the size of the updates arraylist, so you can see it decreasing. 
+		return current;
 	}
 
+	/*The program begins by creating an arraylist of pairs of the form (number n, number n). It sends this array to be updated by the stepDown method.
+	 * This should lead to an arraylist with only one pair in it. Since this pair is the last to survive, the number which is the pair's first
+	 * member must have the longest collatz sequence. The program should then print out that number. Unfortunately, the size of the arraylist of pairs stops
+	 * shrinking once it has only 355 pairs. I have no clue why. 
+	 */
+	
 	public static void main(String[] args) {
-		HashMap<Integer, Integer> current = new HashMap<Integer, Integer>();
+		ArrayList<Integer[]> current = new ArrayList<Integer[]>();
 		for (int i = 1; i < 1000000; i++) {
-			current.put(i, i);
+			Integer[] obj = new Integer[2];
+			obj[0] = i;
+			obj[1] = i;
+			current.add(obj);
 		}
 
 		while (current.size() > 1) {			
-			System.out.println(current.size());
 			current = stepDown(current);
 		}
 
-		for (int i : current.keySet()) System.out.println(i);
-	
+		System.out.println(current.get(0)[0]);
+		
 	}
 
 }
