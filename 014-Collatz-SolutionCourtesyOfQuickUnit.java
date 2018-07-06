@@ -16,45 +16,30 @@
 
 public class N014Collatz10 {
 
-	public static int nextCollatzNumber(int n) {
+	public static long nextCollatzNumber(long n) {
 		if (n % 2 == 0)
 			return n / 2;
-		
 		return 3 * n + 1;
-		
 	}
-	
-	public static int lengthOfCollatzSequence(int n) {		
-		int l = 1;
-		while (n != 1) {
-			n = nextCollatzNumber(n);
-			l++;
-		}
-		return l;
-		
-	}
-	
-	public static int optimisedLengthOfCollatzSequence(int n, int[] lengths) {
+
+	public static int optimisedLengthOfCollatzSequence(long n, int[] lengths) {
 		int m = 0;
 		if (n == 1) {
 			return 1;
 		}
-		
-		if (n < lengths.length - 1 && lengths[n] != 0) {
-			return lengths[n];
+		if (n < lengths.length - 1 && lengths[Math.toIntExact(n)] != 0) {
+			return lengths[Math.toIntExact(n)];
 		}
-		
-		if (n < lengths.length - 1) {
-			m = lengthOfCollatzSequence(n);
-			lengths[n] = m;
+		m = optimisedLengthOfCollatzSequence(nextCollatzNumber(n), lengths) + 1;
+		if (n < lengths.length - 1) {			
+			lengths[Math.toIntExact(n)] = m;
 		}
 		return m;
-		
 	}
-	
+
 	public static void main(String[] args) {
 		int[] lengths = new int[20000000];
-		int longest = 0;		
+		int longest = 0;
 		int big = 0;
 		for (int i = 1; i < 1000000; i++) {
 			int size = optimisedLengthOfCollatzSequence(i, lengths);
