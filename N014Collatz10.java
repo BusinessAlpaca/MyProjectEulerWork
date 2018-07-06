@@ -32,10 +32,13 @@ public class N014Collatz10 {
 	}
 	
 	public static int optimisedLengthOfCollatzSequence(int n, int[] lengths) {
+		int m = 0;
 		if (n == 1) {return 1;}
 		if (n < lengths.length - 1 && lengths[n] != 0) {return lengths[n];}
-		if (n < lengths.length - 1) {lengths[n] = lengthOfCollatzSequence(n);}
-		return lengthOfCollatzSequence(n);
+		if (n < lengths.length - 1) {
+			m = lengthOfCollatzSequence(n);
+			lengths[n] = m;}
+		return m;
 	}
 	
 	public static void main(String[] args) {
