@@ -19,7 +19,9 @@ public class N014Collatz10 {
 	public static int nextCollatzNumber(int n) {
 		if (n % 2 == 0)
 			return n / 2;
+		
 		return 3 * n + 1;
+		
 	}
 	
 	public static int lengthOfCollatzSequence(int n) {		
@@ -28,26 +30,34 @@ public class N014Collatz10 {
 			n = nextCollatzNumber(n);
 			l++;
 		}
-		return l;		
+		return l;
+		
 	}
 	
 	public static int optimisedLengthOfCollatzSequence(int n, int[] lengths) {
 		int m = 0;
-		if (n == 1) {return 1;}
-		if (n < lengths.length - 1 && lengths[n] != 0) {return lengths[n];}
+		if (n == 1) {
+			return 1;
+		}
+		
+		if (n < lengths.length - 1 && lengths[n] != 0) {
+			return lengths[n];
+		}
+		
 		if (n < lengths.length - 1) {
 			m = lengthOfCollatzSequence(n);
-			lengths[n] = m;}
+			lengths[n] = m;
+		}
 		return m;
+		
 	}
 	
 	public static void main(String[] args) {
 		int[] lengths = new int[20000000];
 		int longest = 0;		
-		int size = 0;
 		int big = 0;
 		for (int i = 1; i < 1000000; i++) {
-			size = optimisedLengthOfCollatzSequence(i, lengths);
+			int size = optimisedLengthOfCollatzSequence(i, lengths);
 			if (size > longest) {
 				longest = size;
 				big = i;
