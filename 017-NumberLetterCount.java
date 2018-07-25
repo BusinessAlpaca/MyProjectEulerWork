@@ -9,9 +9,9 @@
  * contains 23 letters and 115 (one hundred and fifteen) contains 20 letters.
  * The use of "and" when writing out numbers is in compliance with British usage.*/
 
-public class N017NumberLetterCount {
+public class N017NumberLetterCount2 {
 
-	public static String basicTranslate(int n) {
+	public static String Translate(int n) {
 		switch (n) {
 		case 1:
 			return "one";
@@ -67,46 +67,29 @@ public class N017NumberLetterCount {
 			return "eighty";
 		case 90:
 			return "ninety";
-		case 1000:
-			return "onethousand";
 		default:
 			return "";
 		}
-	}
-
-	public static String twoDigitTranslate(int n) {
-		String basic = basicTranslate(n);
-		if (!basic.equals(""))
-			return basic;
-		
-		String twoDigit = Integer.valueOf(n).toString();
-		return basicTranslate(Integer.valueOf(twoDigit.substring(0, 1) + "0"))
-				+ basicTranslate(Integer.valueOf(twoDigit.substring(1)));
-	}
-
-	public static String threeDigitTranslate(int n) {
-		String threeDigit = Integer.valueOf(n).toString();
-
-		if (n % 100 == 0)
-			return basicTranslate(Integer.valueOf(threeDigit.substring(0, 1))) + "hundred";
-
-		return basicTranslate(Integer.valueOf(threeDigit.substring(0, 1))) + "hundredand"
-				+ twoDigitTranslate(Integer.valueOf(threeDigit.substring(1)));
 	}
 
 	public static String buildString(int n) {
 		if (n < 1 || n > 1000)
 			return "";
 
-		String basic = basicTranslate(n);
-		if (!basic.equals(""))
-			return basic;
+		if (n == 1000)
+			return "onethousand";
+
+		String translation = Translate(n);
+		if (!translation.equals(""))
+			return translation;
 
 		if (n < 100)
-			return twoDigitTranslate(n);
-		
-		return threeDigitTranslate(n);
+			return Translate((n / 10) * 10) + Translate(n % 10);
 
+		if (n % 100 == 0)
+			return Translate(n / 100) + "hundred";
+
+		return Translate(n / 100) + "hundredand" + buildString(n % 100);
 	}
 
 	public static void main(String[] args) {
