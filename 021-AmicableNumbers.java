@@ -23,10 +23,7 @@ public class N021AmicableNumbers {
 	
 	public static boolean isAmicable (int n) {
 		int sum = sumDivisors(n);
-		if (n != sum && n == sumDivisors(sum)) {
-			return true;
-		}
-		return false;
+		return n != sum && n == sumDivisors(sum);
 	}
 	
 	public static void main(String[] args) {
