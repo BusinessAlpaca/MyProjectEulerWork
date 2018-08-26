@@ -12,6 +12,8 @@
  * 
  * */
 
+//this code uses PrimeRepresentation objects. Class code in comment below.  
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -80,3 +82,45 @@ public class N029DistinctPowers {
 		System.out.println("Execution time: " + ((end - start) / 1e+6) + " ms");
 	}
 }
+
+/*
+import java.util.Arrays;
+
+//this class represents a positive integer n as an array of
+//prime factor exponents. When n is factored into primes, the
+//exponents of the i-th prime (which may be 0) is held in the (i-1)-th array index.
+
+public class PrimeRepresentation {
+	
+	private final int[] exponents;
+	
+	PrimeRepresentation (int [] exponents) {
+		this.exponents = exponents;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(exponents);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PrimeRepresentation other = (PrimeRepresentation) obj;
+		if (!Arrays.equals(exponents, other.exponents))
+			return false;
+		return true;
+	}
+	
+	
+}
+
+*/
