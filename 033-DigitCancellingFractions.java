@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 /* The fraction 49/98 is a curious fraction, as an inexperienced mathematician in attempting to simplify
  * it may incorrectly believe that 49/98 = 4/8, which is correct, is obtained by cancelling the 9s.
  * 
@@ -24,8 +22,7 @@ public class N033DigitCancellingFractions {
 			for (int j = 2; j < 4; ++j) {
 				if (digits[i] != 0 && digits[i] == digits[j]) {
 					test = digits[1 - i] / digits[5 - j];
-					if (test == fraction) {
-						//System.out.println(Arrays.toString(digits));
+					if (test == fraction) {						
 						return true;
 					}
 				}
