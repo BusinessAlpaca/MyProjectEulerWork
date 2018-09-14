@@ -28,7 +28,7 @@ public class N034DigitFactorials {
 		int sum = 0;
 		for (int n = 10; n < 1_000_000; ++n) {
 			if (isSumOfFactorialOfDigits(n)) {
-				System.out.println(n);
+				//System.out.println(n);
 				sum += n;
 			}
 		}
