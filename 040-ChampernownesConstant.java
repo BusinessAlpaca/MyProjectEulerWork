@@ -5,7 +5,7 @@
  * If dn represents the nth digit of the fractional part, find the value
  *  of the following expression.
  *  
- *  d1 × d10 × d100 × d1_000 × d10_000 × d100_000 × d1_000_000
+ *  d1 Ã— d10 Ã— d100 Ã— d1_000 Ã— d10_000 Ã— d100_000 Ã— d1_000_000
  * */
 
 public class N040ChampernownesConstant {
