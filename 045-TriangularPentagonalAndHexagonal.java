@@ -12,7 +12,7 @@
  * Find the next triangle number that is also pentagonal and hexagonal.
  * */
 
-//note that T(2m-1) = H(m). Therfore:
+//note that T(2m-1) = H(m). Therefore:
 //it's enough to generate Hexagonals and check for Pentagonality
 
 public class N045TriangularPentagonalAndHexagonal {
